@@ -1,12 +1,17 @@
 <script setup lang="ts">
-import { VisDonut, VisSingleContainer } from '@unovis/vue'
+import { Donut } from '@unovis/ts'
+import { VisBulletLegend, VisDonut, VisSingleContainer, VisTooltip } from '@unovis/vue'
 
 const props = defineProps<{
-  type: string
-  label: string
+  type?: string
   data: number[]
-  colors: string[]
+  radius: number
+  labels: {
+    name: string
+    color: string
+  }[]
 }>()
+
 const value = (d: number) => d
 
 const isHalf = props.type === 'half'
@@ -19,22 +24,34 @@ const isHalf = props.type === 'half'
       :data="data" :height="isHalf ? 300 : 200" :margin="{
       }"
     >
+      <VisTooltip
+        :horizontal-shift="20"
+        :vertical-shift="20"
+        :triggers="{
+          [Donut.selectors.segment]: (d) => {
+            console.log()
+
+            return `<div class='flex items-center'><div class='w-2 h-2 rounded-full mr-2' style='background-color: ${labels[d.index].color} ;'></div>
+        <div>${d.data}</div>
+      </vistooltip>
+    </vissinglecontainer>
+  </div>`
+          },
+        }"
+      />
+
       <VisDonut
-        :show-background="false"
         :value="value"
-        :corner-radius="5"
-        :color="props.colors"
+        :corner-radius="radius"
+        :color="props.labels.map((l) => l.color)"
         :angle-range="isHalf ? [-1.5707963267948966, 1.5707963267948966] : []"
       />
     </VisSingleContainer>
 
-    <div class="absolute text-center">
-      <div class="font-semibold">
-        {{ label }}
-      </div>
-      <div class="text-gray-500">
-        2 seconds ago
-      </div>
-    </div>
+    <slot />
+  </div>
+
+  <div class="flex items-center justify-center mt-4">
+    <VisBulletLegend :items="labels" />
   </div>
 </template>
