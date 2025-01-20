@@ -3,6 +3,7 @@ import { GroupedBar } from '@unovis/ts'
 
 const props = defineProps<{
   data: T[]
+  height: number
   colorMap: Record<string, string>
   xAxisKey: keyof T
   yAxisKeys: string[]
@@ -28,6 +29,7 @@ const triggers = {
 <template>
   <BaseBar
     :data="data"
+    :height="height"
     :categories="categories"
     :x-label="xLabel"
     :y-label="yLabel"

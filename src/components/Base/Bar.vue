@@ -3,7 +3,7 @@ import { VisAxis, VisBulletLegend, VisGroupedBar, VisTooltip, VisXYContainer } f
 
 const props = defineProps<{
   data: T[]
-  height: number,
+  height: number
   categories: {
     name: string
     color: string
@@ -12,12 +12,13 @@ const props = defineProps<{
   xLabel: string
   yLabel: string
   xFormatter: (index: number) => string
-  xTickCount: number
   barPadding?: number
   tooltipTriggers: any
+  yNumTicks?: number
+  xNumTicks?: number
 }>()
 
-const color = (d: T, i: number) => props.categories[i].color
+const color = (: T, i: number) => props.categories[i].color
 </script>
 
 <template>
@@ -30,27 +31,28 @@ const color = (d: T, i: number) => props.categories[i].color
         :data="data"
         :x="(_: T, i: number) => i"
         :y="yAxis"
-        :color="color"
-        :group-padding="0.5"
-        :bar-padding="barPadding ?? 0"
-        :rounded-corners="40"
         :grid-line="false"
         :domain-line="false"
+        :color="color"
+        :rounded-corners="40"
+        :num-ticks="yNumTicks ?? 4"
+        :group-padding="0.5"
+        :bar-padding="barPadding ?? 0"
       />
       <VisAxis
         type="x"
         :label="xLabel"
         :grid-line="false"
         :domain-line="false"
-        :num-ticks="xTickCount ?? data.length"
+        :num-ticks="xNumTicks ?? 4"
         :tick-format="xFormatter"
       />
       <VisAxis
         type="y"
+        :label="yLabel"
         :grid-line="true"
         :domain-line="false"
         :tick-format="(value: number) => (value / 10 ** 6).toFixed(1)"
-        :label="yLabel"
       />
     </VisXYContainer>
     <div class="flex items center justify-end">
