@@ -18,7 +18,7 @@ const props = defineProps<{
   xNumTicks?: number
 }>()
 
-const color = (: T, i: number) => props.categories[i].color
+const color = (_: T, i: number) => props.categories[i].color
 </script>
 
 <template>
