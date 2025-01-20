@@ -5,8 +5,9 @@ import { VisArea, VisAxis, VisBulletLegend, VisCrosshair, VisLine, VisTooltip, V
 
 const props = defineProps<{
   data: T[]
-  xLabel: string
-  yLabel: string
+  height: number
+  xLabel?: string
+  yLabel?: string
   categories: Record<string, BulletLegendItemInterface>
   displayProps: string[]
   xFormatter: (v: number) => string
@@ -21,7 +22,7 @@ const colors = Object.values(props.categories).map(c => c.color)
 function accessors(id: string): { y: NumericAccessor<T>, color: string } {
   return {
     y: (d: T) => Number(d[id as keyof typeof d]),
-    color: props.categories[id]?.color ?? '#3b82f6',
+    color: props.categories[id]?.color ?? '#3b82f6'
   }
 }
 
@@ -34,18 +35,14 @@ const svgDefs = colors.map((color, index) => `
 </script>
 
 <template>
-  <div class="space-y-2">
-    <VisBulletLegend
-      :items="Object.values(categories)"
-    />
+  <div class="space-y-4">
     <VisXYContainer
       :data="data"
-      :height="275"
+      :height="height"
       :svg-defs="svgDefs"
       class=""
     >
       <VisTooltip
-        :follow-cursor="false"
         :horizontal-placement="Position.Right"
         :vertical-placement="Position.Top"
       />
@@ -61,7 +58,7 @@ const svgDefs = colors.map((color, index) => `
           :curve-type="curveType ?? CurveType.MonotoneX"
         />
         <VisLine
-          :x="(_: T, i: number) => i"
+          :x="(d: T, i: number) => i"
           :y="(d: T) => d[i as keyof typeof d]"
           :color="colors[iKey]"
           :curve-type="curveType ?? CurveType.MonotoneX"
@@ -74,6 +71,8 @@ const svgDefs = colors.map((color, index) => `
         :domain-line="false"
         :tick-format="xFormatter"
         :num-ticks="xNumTicks ?? 4"
+        :label="xLabel"
+        :label-margin="8"
       />
       <VisAxis
         type="y"
@@ -86,5 +85,10 @@ const svgDefs = colors.map((color, index) => `
         :template="crossHairTemplate"
       />
     </VisXYContainer>
+    <div class="flex items center justify-end">
+      <VisBulletLegend
+        :items="Object.values(categories)"
+      />
+    </div>
   </div>
 </template>
