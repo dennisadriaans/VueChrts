@@ -77,6 +77,7 @@ const svgDefs = colors.map((color, index) => `
       <VisAxis
         type="y"
         :num-ticks="yNumTicks ?? 4"
+        :grid-line="false"
         :domain-line="false"
         :label="yLabel"
       />
