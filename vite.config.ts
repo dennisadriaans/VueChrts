@@ -4,6 +4,11 @@ import { resolve } from 'path'
 import dts from 'vite-plugin-dts'
 
 export default defineConfig({
+  resolve: {
+    alias: {
+        vue: 'vue/dist/vue.esm-bundler.js'
+    }
+  },
   plugins: [
     vue(),
     dts({

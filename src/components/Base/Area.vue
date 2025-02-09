@@ -11,6 +11,7 @@ const props = defineProps<{
   categories: Record<string, BulletLegendItemInterface>
   displayProps: string[]
   xFormatter: (v: number) => string
+  yFormatter: (v: number) => string
   crossHairTemplate: (d: T) => string
   curveType?: CurveType
   yNumTicks?: number
@@ -77,6 +78,7 @@ const svgDefs = colors.map((color, index) => `
       <VisAxis
         type="y"
         :num-ticks="yNumTicks ?? 4"
+        :tick-format="yFormatter"
         :domain-line="false"
         :grid-line="false"
         :label="yLabel"
