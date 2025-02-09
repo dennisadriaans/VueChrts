@@ -5,6 +5,7 @@ import { VisBulletLegend, VisDonut, VisSingleContainer, VisTooltip } from '@unov
 const props = defineProps<{
   type?: string
   data: number[]
+  height: number
   radius: number
   labels: {
     name: string
@@ -21,8 +22,9 @@ const isHalf = props.type === 'half'
   <div class="flex items-center justify-center">
     <VisSingleContainer
       :class="isHalf ? 'mt-24' : ''"
-      :data="data" :height="isHalf ? 300 : 200" :margin="{
-      }"
+      :data="data"
+      :height="height"
+      :margin="{}"
     >
       <VisTooltip
         :horizontal-shift="20"

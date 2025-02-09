@@ -4,18 +4,21 @@ import Area from './Base/Area.vue'
 
 const props = defineProps<{
   data: T[]
-  categories: Record<string, BulletLegendItemInterface>
+  height: number
   xLabel: string
   yLabel: string
   displayProps: string[]
+  yNumTicks?: number
+  xNumTicks?: number
+  curveType?: CurveType
+  categories: Record<string, BulletLegendItemInterface>
   xFormatter: (v: number) => string
-  generateChartTooltip: (d: T) => string
+  crossHairTemplate: (d: T) => string
 }>()
 </script>
 
 <template>
   <Area
     v-bind="props"
-    :cross-hair-template="generateChartTooltip"
   />
 </template>

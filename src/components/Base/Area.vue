@@ -5,15 +5,16 @@ import { VisArea, VisAxis, VisBulletLegend, VisCrosshair, VisLine, VisTooltip, V
 
 const props = defineProps<{
   data: T[]
+  height: number
   xLabel: string
   yLabel: string
-  categories: Record<string, BulletLegendItemInterface>
   displayProps: string[]
-  xFormatter: (v: number) => string
-  crossHairTemplate: (d: T) => string
-  curveType?: CurveType
   yNumTicks?: number
   xNumTicks?: number
+  curveType?: CurveType
+  categories: Record<string, BulletLegendItemInterface>
+  xFormatter: (v: number) => string
+  crossHairTemplate: (d: T) => string
 }>()
 
 const colors = Object.values(props.categories).map(c => c.color)
@@ -40,7 +41,7 @@ const svgDefs = colors.map((color, index) => `
     />
     <VisXYContainer
       :data="data"
-      :height="275"
+      :height="height"
       :svg-defs="svgDefs"
       class=""
     >
