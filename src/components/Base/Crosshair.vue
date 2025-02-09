@@ -21,7 +21,7 @@ function template(d: any) {
   }
   else {
     // Check if we're on the client side
-    if (typeof document === 'undefined') return ''
+    if (!document || typeof document === 'undefined') return ''
 
     const componentDiv = document.createElement('div')
     const omittedData = Object.entries(omit(d, [props.index])).map(([key, value]) => {
