@@ -20,18 +20,18 @@ function template(d: any) {
     return wm.get(d)
   }
   else {
-    // Check if we're on the client side
-    if (!document || typeof document === 'undefined') return ''
-
-    const componentDiv = document.createElement('div')
-    const omittedData = Object.entries(omit(d, [props.index])).map(([key, value]) => {
-      const legendReference = props.items.find(i => i.name === key)
-      return { ...legendReference, value }
-    })
+    if (typeof window !== 'undefined') {
+      const componentDiv = document.createElement('div')
+      const omittedData = Object.entries(omit(d, [props.index])).map(([key, value]) => {
+        const legendReference = props.items.find(i => i.name === key)
+        return { ...legendReference, value }
+      })
     const TooltipComponent = props.customTooltip ?? VisTooltip
     createApp(TooltipComponent, { title: d[props.index].toString(), data: omittedData }).mount(componentDiv)
     wm.set(d, componentDiv.innerHTML)
     return componentDiv.innerHTML
+    }
+
   }
 }
 

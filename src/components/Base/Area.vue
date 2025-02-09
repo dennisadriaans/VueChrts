@@ -9,8 +9,12 @@ const props = defineProps<{
   xLabel?: string
   yLabel?: string
   categories: Record<string, BulletLegendItemInterface>
+  displayProps: string[]
   xFormatter: (v: number) => string
   crossHairTemplate: (d: T) => string
+  curveType?: CurveType
+  yNumTicks?: number
+  xNumTicks?: number
 }>()
 
 const colors = Object.values(props.categories).map(c => c.color)
@@ -54,7 +58,7 @@ const svgDefs = colors.map((color, index) => `
           :curve-type="curveType ?? CurveType.MonotoneX"
         />
         <VisLine
-          :x="(d: T, i: number) => i"
+          :x="(_: any, i: number) => i"
           :y="(d: T) => d[i as keyof typeof d]"
           :color="colors[iKey]"
           :curve-type="curveType ?? CurveType.MonotoneX"
@@ -73,7 +77,6 @@ const svgDefs = colors.map((color, index) => `
       <VisAxis
         type="y"
         :num-ticks="yNumTicks ?? 4"
-        :grid-line="false"
         :domain-line="false"
         :label="yLabel"
       />
