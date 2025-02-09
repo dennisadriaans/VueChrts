@@ -78,6 +78,7 @@ const svgDefs = colors.map((color, index) => `
         type="y"
         :num-ticks="yNumTicks ?? 4"
         :domain-line="false"
+        :grid-line="false"
         :label="yLabel"
       />
       <VisCrosshair
