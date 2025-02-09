@@ -13,6 +13,7 @@ const props = defineProps<{
   xNumTicks?: number
   curveType?: CurveType
   xFormatter: (v: number) => string
+  yFormatter: (v: number) => string
   crossHairTemplate: (d: T) => string
 }>()
 </script>
