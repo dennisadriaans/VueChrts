@@ -1,6 +1,6 @@
 <script>
 import { ref } from 'vue'
-import DemoComponent from './components/demo.vue'
+import DemoComponent from './components/Index.vue'
 
 export default {
   name: 'App',

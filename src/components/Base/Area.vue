@@ -11,7 +11,7 @@ const props = defineProps<{
   categories: Record<string, BulletLegendItemInterface>
   displayProps: string[]
   xFormatter: (v: number) => string
-  yFormatter: (v: number) => string
+  yFormatter?: (v: number) => string
   crossHairTemplate: (d: T) => string
   curveType?: CurveType
   yNumTicks?: number
