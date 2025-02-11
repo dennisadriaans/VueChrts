@@ -18,6 +18,7 @@ declare module 'vue' {
     Index: typeof import('./src/components/Index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Tooltip: typeof import('./src/components/Base/Tooltip.vue')['default']
     UApp: typeof import('./node_modules/.pnpm/@nuxt+ui@3.0.0-alpha.12_@babel+parser@7.26.8_embla-carousel@8.5.2_radix-vue@1.9.13_vue@3.5.13_x422h3vsgrgcvkoya6nlnhdf5i/node_modules/@nuxt/ui/dist/runtime/components/App.vue')['default']
     UButton: typeof import('./node_modules/.pnpm/@nuxt+ui@3.0.0-alpha.12_@babel+parser@7.26.8_embla-carousel@8.5.2_radix-vue@1.9.13_vue@3.5.13_x422h3vsgrgcvkoya6nlnhdf5i/node_modules/@nuxt/ui/dist/runtime/components/Button.vue')['default']
     UCard: typeof import('./node_modules/.pnpm/@nuxt+ui@3.0.0-alpha.12_@babel+parser@7.26.8_embla-carousel@8.5.2_radix-vue@1.9.13_vue@3.5.13_x422h3vsgrgcvkoya6nlnhdf5i/node_modules/@nuxt/ui/dist/runtime/components/Card.vue')['default']

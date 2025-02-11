@@ -1,56 +1,77 @@
 <script setup lang="ts" generic="T">
-import type { BulletLegendItemInterface, NumericAccessor } from '@unovis/ts'
-import { CurveType, Position } from '@unovis/ts'
-import { VisArea, VisAxis, VisBulletLegend, VisCrosshair, VisLine, VisTooltip, VisXYContainer } from '@unovis/vue'
+import { computed, createApp } from "vue";
+import type { BulletLegendItemInterface, NumericAccessor } from "@unovis/ts";
+import { CurveType, Position } from "@unovis/ts";
+import {
+  VisArea,
+  VisAxis,
+  VisBulletLegend,
+  VisCrosshair,
+  VisLine,
+  VisTooltip,
+  VisXYContainer,
+} from "@unovis/vue";
+import { AreaChartItem1 } from "../../data/AreaChartData";
+
+import Tooltip from "./Tooltip.vue";
 
 const props = defineProps<{
-  data: T[]
-  height: number
-  xLabel?: string
-  yLabel?: string
-  categories: Record<string, BulletLegendItemInterface>
-  displayProps: string[]
-  xFormatter: (v: number) => string
-  yFormatter?: (v: number) => string
-  crossHairTemplate: (d: T) => string
-  curveType?: CurveType
-  yNumTicks?: number
-  xNumTicks?: number
-}>()
+  data: T[];
+  height: number;
+  xLabel?: string;
+  yLabel?: string;
+  categories: Record<string, BulletLegendItemInterface>;
+  displayProps: string[];
+  xFormatter: (i: number, idx: number) => string;
+  yFormatter?: (i: number, idx: number) => string;
+  curveType?: CurveType;
+  yNumTicks?: number;
+  xNumTicks?: number;
+}>();
 
-const colors = Object.values(props.categories).map(c => c.color)
+const generateTooltip1 = computed(() => (d: AreaChartItem1) => {
+  const app = createApp(Tooltip, {
+    data: d,
+  });
 
-function accessors(id: string): { y: NumericAccessor<T>, color: string } {
+  const container = document.createElement("div");
+  app.mount(container);
+
+  const html = container.innerHTML;
+  app.unmount();
+
+  return html;
+});
+
+const colors = Object.values(props.categories).map((c) => c.color);
+
+function accessors(id: string): { y: NumericAccessor<T>; color: string } {
   return {
     y: (d: T) => Number(d[id as keyof typeof d]),
-    color: props.categories[id]?.color ?? '#3b82f6'
-  }
+    color: props.categories[id]?.color ?? "#3b82f6",
+  };
 }
 
-const svgDefs = colors.map((color, index) => `
+const svgDefs = colors
+  .map(
+    (color, index) => `
   <linearGradient id="gradient${index}-${color}" gradientTransform="rotate(90)">
     <stop offset="0%" stop-color="${color}" stop-opacity="1" />
     <stop offset="100%" stop-color="${color}" stop-opacity="0" />
   </linearGradient>
-`).join('')
+`
+  )
+  .join("");
 </script>
 
 <template>
   <div class="space-y-4">
-    <VisXYContainer
-      :data="data"
-      :height="height"
-      :svg-defs="svgDefs"
-      class=""
-    >
+    <VisXYContainer :data="data" :height="height" :svg-defs="svgDefs" class="">
       <VisTooltip
         :horizontal-placement="Position.Right"
         :vertical-placement="Position.Top"
       />
-      <template
-        v-for="(i, iKey) in props.displayProps"
-        :key="iKey"
-      >
+      <template v-for="(i, iKey) in props.displayProps" :key="iKey">
         <VisArea
           :x="(_: T, i: number) => i"
           v-bind="accessors(i)"
@@ -83,15 +104,10 @@ const svgDefs = colors.map((color, index) => `
         :grid-line="false"
         :label="yLabel"
       />
-      <VisCrosshair
-        color="#666"
-        :template="crossHairTemplate"
-      />
+      <VisCrosshair color="#666" :template="generateTooltip1" />
     </VisXYContainer>
     <div class="flex items center justify-end">
-      <VisBulletLegend
-        :items="Object.values(categories)"
-      />
+      <VisBulletLegend :items="Object.values(categories)" />
     </div>
   </div>
 </template>

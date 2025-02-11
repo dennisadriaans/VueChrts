@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { computed } from "vue";
 
 import BaseArea from "./../Base/Area.vue";
 import BaseAreaStacked from "./../Base/AreaStacked.vue";
@@ -9,37 +8,10 @@ import {
   AreaChartData1,
   AreaChartData2,
   AreaChartData3,
-  type AreaChartItem1,
-  type AreaChartItem2,
   categories1,
   categories2,
 } from "./../../data/AreaChartData";
 
-const generateTooltip1 = computed(() => (d: AreaChartItem1) => {
-  return `<div class="flex flex-col">
-  <div class="flex items-center mr-2 mt-2">
-    <span class="w-3 h-3 rounded-full bg-[#3b82f6] mr-2"></span>
-    <span class="font-semibold">Desktop:</span>
-  </div>
-  <span class="font-normal">${d.desktop}</span>
-  <div class="flex items-center mr-2 mt-2">
-    <span class="w-3 h-3 rounded-full bg-[#10b981] mr-2"></span>
-    <span class="font-semibold">Mobile:</span>
-  </div>
-  <span class="font-normal">${d.mobile}</span>
-</div>`;
-});
-
-const generateTooltip2 = computed(() => (d: AreaChartItem2) => {
-  return `<div class="flex flex-col">
-  <div class="flex items-center mr-2 mt-2">
-    <span class="w-3 h-3 rounded-full bg-[#3b82f6] mr-2"></span>
-    <span class="font-semibold">Temperature:</span>
-  </div>
-  <span class="font-normal">${d.hour}</span>
-  <span class="font-normal">${d.temperature}</span>
-</div>`;
-});
 </script>
 
 <template>
@@ -66,7 +38,6 @@ const generateTooltip2 = computed(() => (d: AreaChartItem2) => {
           :display-props="['desktop', 'mobile']"
           :x-formatter="(i: number): string => `${AreaChartData1[i].date}`"
           :curve-type="CurveType.MonotoneX"
-          :cross-hair-template="generateTooltip1"
         />
       </UCard>
     </div>
@@ -90,7 +61,6 @@ const generateTooltip2 = computed(() => (d: AreaChartItem2) => {
               return `${AreaChartData2[i].hour}`;
             }"
             :curve-type="CurveType.Basis"
-            :cross-hair-template="generateTooltip2"
           />
         </UCard>
       </div>
