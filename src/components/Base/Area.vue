@@ -66,7 +66,7 @@ const svgDefs = colors
 
 <template>
   <div class="space-y-4">
-    <VisXYContainer :data="data" :height="height" :svg-defs="svgDefs" class="">
+    <VisXYContainer :data="data" :height="height" :svg-defs="svgDefs">
       <VisTooltip
         :horizontal-placement="Position.Right"
         :vertical-placement="Position.Top"
@@ -89,10 +89,9 @@ const svgDefs = colors
 
       <VisAxis
         type="x"
-        :grid-line="false"
-        :domain-line="false"
         :tick-format="xFormatter"
         :num-ticks="xNumTicks ?? 4"
+        :grid-line="false"
         :label="xLabel"
         :label-margin="8"
       />
@@ -101,8 +100,13 @@ const svgDefs = colors
         :num-ticks="yNumTicks ?? 4"
         :tick-format="yFormatter"
         :domain-line="false"
-        :grid-line="false"
+        :grid-line="true"
         :label="yLabel"
+        :style="{
+          gridLine: {
+            stroke: '#f00',
+          },
+        }"
       />
       <VisCrosshair color="#666" :template="generateTooltip1" />
     </VisXYContainer>

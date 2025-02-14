@@ -2,15 +2,15 @@
 @import "@nuxt/ui";
 
 :root {
-    --vis-axis-grid-line-width: 0px;
-    --vis-axis-grid-color: transparent !important;
+    /* --vis-axis-grid-line-width: 0px;
+    --vis-axis-grid-color: transparent !important; */
     --vis-tooltip-background-color: #121212 !important;
     --vis-tooltip-border-color: none !important;
     --vis-tooltip-text-color: rgba(255, 255, 255, 0.5) !important;
   }
   .dark {
-    --vis-axis-grid-line-width: 0px;
-    --vis-dark-axis-grid-color: transparent !important;
+    /* --vis-axis-grid-line-width: 0px;
+    --vis-dark-axis-grid-color: transparent !important; */
     --vis-tooltip-background-color: #121212 !important;
     --vis-tooltip-border-color: none !important;
       --vis-tooltip-text-color: rgba(255, 255, 255, 0.5) !important;
@@ -18,3 +18,4 @@
       --vis-legend-label-color: rgba(255, 255, 255, 0.75) !important;
 
   }
+  

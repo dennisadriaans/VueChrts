@@ -14,6 +14,12 @@ importers:
       '@unhead/vue':
         specifier: ^1.11.18
         version: 1.11.18(vue@3.5.13(typescript@5.6.3))
+      '@vueuse/core':
+        specifier: ^12.6.1
+        version: 12.6.1(typescript@5.6.3)
+      d3:
+        specifier: ^7.8.5
+        version: 7.9.0
       tailwindcss:
         specifier: ^4.0.0
         version: 4.0.0
@@ -24,6 +30,9 @@ importers:
         specifier: ^4.5.0
         version: 4.5.0(vue@3.5.13(typescript@5.6.3))
     devDependencies:
+      '@types/d3':
+        specifier: ^7.4.0
+        version: 7.4.3
       '@unovis/ts':
         specifier: ^1.5.0
         version: 1.5.0
@@ -977,6 +986,9 @@ packages:
   '@vueuse/core@12.5.0':
     resolution: {integrity: sha512-GVyH1iYqNANwcahAx8JBm6awaNgvR/SwZ1fjr10b8l1HIgDp82ngNbfzJUgOgWEoxjL+URAggnlilAEXwCOZtg==}
 
+  '@vueuse/core@12.6.1':
+    resolution: {integrity: sha512-FpgM1tXGAHsAC5n4Tflyg0vSoJUmdevfKaAhKFdxiK9BTIdHOHOiWmo+xivwdzjYFIvI8cEeJWYuqs646jOM2w==}
+
   '@vueuse/integrations@12.5.0':
     resolution: {integrity: sha512-HYLt8M6mjUfcoUOzyBcX2RjpfapIwHPBmQJtTmXOQW845Y/Osu9VuTJ5kPvnmWJ6IUa05WpblfOwZ+P0G4iZsQ==}
     peerDependencies:
@@ -1024,11 +1036,17 @@ packages:
   '@vueuse/metadata@12.5.0':
     resolution: {integrity: sha512-Ui7Lo2a7AxrMAXRF+fAp9QsXuwTeeZ8fIB9wsLHqzq9MQk+2gMYE2IGJW48VMJ8ecvCB3z3GsGLKLbSasQ5Qlg==}
 
+  '@vueuse/metadata@12.6.1':
+    resolution: {integrity: sha512-2094HNXGdsU3aqRbad0vmlRgGncMC4u2f6nFdW1mUn7b7ym4hORrDZfyeq8G5BfGvX4y0zZynWfCdtB2WwpyVw==}
+
   '@vueuse/shared@10.11.1':
     resolution: {integrity: sha512-LHpC8711VFZlDaYUXEBbFBCQ7GS3dVU9mjOhhMhXP6txTV4EhYQg/KGnQuvt/sPAtoUKq7VVUnL6mVtFoL42sA==}
 
   '@vueuse/shared@12.5.0':
     resolution: {integrity: sha512-vMpcL1lStUU6O+kdj6YdHDixh0odjPAUM15uJ9f7MY781jcYkIwFA4iv2EfoIPO6vBmvutI1HxxAwmf0cx5ISQ==}
+
+  '@vueuse/shared@12.6.1':
+    resolution: {integrity: sha512-ukTb2na19KT1/YVjj4CYBDOgiV/xmsSJRL6TcKeiz2db+P5bT3I0OJxy38eRR3WSN8CmSnt7MdVJ16vX6VZFxg==}
 
   acorn@8.14.0:
     resolution: {integrity: sha512-cl669nCJTZBsL97OF4kUQm5g5hC2uihk0NxY3WENAC0TYdILVkAyHymAntgxGkl7K+t0cXIrH5siy5S4XkFycA==}
@@ -3062,7 +3080,7 @@ snapshots:
       '@tailwindcss/vite': 4.0.0(vite@6.1.0(jiti@2.4.2)(lightningcss@1.29.1))
       '@tanstack/vue-table': 8.20.5(vue@3.5.13(typescript@5.6.3))
       '@unhead/vue': 1.11.18(vue@3.5.13(typescript@5.6.3))
-      '@vueuse/core': 12.5.0(typescript@5.6.3)
+      '@vueuse/core': 12.6.1(typescript@5.6.3)
       '@vueuse/integrations': 12.5.0(fuse.js@7.1.0)(typescript@5.6.3)
       colortranslator: 4.1.0
       consola: 3.4.0
@@ -3089,7 +3107,7 @@ snapshots:
       tinyglobby: 0.2.10
       typescript: 5.6.3
       unplugin: 2.1.2
-      unplugin-auto-import: 19.0.0(@nuxt/kit@3.15.4)(@vueuse/core@12.5.0(typescript@5.6.3))(rollup@4.34.6)
+      unplugin-auto-import: 19.0.0(@nuxt/kit@3.15.4)(@vueuse/core@12.6.1(typescript@5.6.3))(rollup@4.34.6)
       unplugin-vue-components: 28.0.0(@babel/parser@7.26.8)(@nuxt/kit@3.15.4)(rollup@4.34.6)(vue@3.5.13(typescript@5.6.3))
       vaul-vue: 0.2.1(radix-vue@1.9.13(vue@3.5.13(typescript@5.6.3)))(vue@3.5.13(typescript@5.6.3))
     transitivePeerDependencies:
@@ -3735,6 +3753,15 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
+  '@vueuse/core@12.6.1(typescript@5.6.3)':
+    dependencies:
+      '@types/web-bluetooth': 0.0.20
+      '@vueuse/metadata': 12.6.1
+      '@vueuse/shared': 12.6.1(typescript@5.6.3)
+      vue: 3.5.13(typescript@5.6.3)
+    transitivePeerDependencies:
+      - typescript
+
   '@vueuse/integrations@12.5.0(fuse.js@7.1.0)(typescript@5.6.3)':
     dependencies:
       '@vueuse/core': 12.5.0(typescript@5.6.3)
@@ -3749,6 +3776,8 @@ snapshots:
 
   '@vueuse/metadata@12.5.0': {}
 
+  '@vueuse/metadata@12.6.1': {}
+
   '@vueuse/shared@10.11.1(vue@3.5.13(typescript@5.6.3))':
     dependencies:
       vue-demi: 0.14.10(vue@3.5.13(typescript@5.6.3))
@@ -3757,6 +3786,12 @@ snapshots:
       - vue
 
   '@vueuse/shared@12.5.0(typescript@5.6.3)':
+    dependencies:
+      vue: 3.5.13(typescript@5.6.3)
+    transitivePeerDependencies:
+      - typescript
+
+  '@vueuse/shared@12.6.1(typescript@5.6.3)':
     dependencies:
       vue: 3.5.13(typescript@5.6.3)
     transitivePeerDependencies:
@@ -4766,7 +4801,7 @@ snapshots:
       '@internationalized/date': 3.7.0
       '@internationalized/number': 3.6.0
       '@tanstack/vue-virtual': 3.13.0(vue@3.5.13(typescript@5.6.3))
-      '@vueuse/core': 12.5.0(typescript@5.6.3)
+      '@vueuse/core': 12.6.1(typescript@5.6.3)
       '@vueuse/shared': 12.5.0(typescript@5.6.3)
       aria-hidden: 1.2.4
       defu: 6.1.4
@@ -5030,7 +5065,7 @@ snapshots:
 
   universalify@0.1.2: {}
 
-  unplugin-auto-import@19.0.0(@nuxt/kit@3.15.4)(@vueuse/core@12.5.0(typescript@5.6.3))(rollup@4.34.6):
+  unplugin-auto-import@19.0.0(@nuxt/kit@3.15.4)(@vueuse/core@12.6.1(typescript@5.6.3))(rollup@4.34.6):
     dependencies:
       '@antfu/utils': 0.7.10
       '@rollup/pluginutils': 5.1.4(rollup@4.34.6)
@@ -5041,7 +5076,7 @@ snapshots:
       unplugin: 2.1.2
     optionalDependencies:
       '@nuxt/kit': 3.15.4
-      '@vueuse/core': 12.5.0(typescript@5.6.3)
+      '@vueuse/core': 12.6.1(typescript@5.6.3)
     transitivePeerDependencies:
       - rollup
 
